@@ -78,8 +78,8 @@ Else {
 }
 
 # Download the VHD used in the lab
-$Url = "https://follisutility.blob.core.windows.net/hols/wis2016.vhd?st=2018-04-12T05%3A36%3A00Z&se=2019-04-13T05%3A36%3A00Z&sp=rl&sv=2017-04-17&sr=b&sig=QCnjVXlef9zFmd5GEx2cCpLWCvIk87xVBaqae2O%2BYx4%3D"
-$File = "C:\wis2016.vhd"
+$Url = "https://follisutility.blob.core.windows.net/hols/ws2016.vhd?st=2018-04-12T01%3A36%3A00Z&se=2019-04-13T01%3A36%3A00Z&sp=rl&sv=2017-04-17&sr=b&sig=Ye0EZZcQthq3FlEKsf7sjlJtCFCQDC4jiAmDa%2BKXA3k%3D"
+$File = "C:\ws2016.vhd"
 
 If (Test-Path -Path $File) {
   Write-Output "File exists, skipping download"
@@ -88,6 +88,11 @@ Else {
   Write-Output "Downloading Lab File"
 
   Try {
+
+    # Copy with alternate credentials
+    # https://stackoverflow.com/questions/612015/copy-item-with-alternate-credentials
+    # net use \\[IPaddress]\Folder 'PASSWORD' /USER:$User
+
     Import-Module BitsTransfer    
     Start-BitsTransfer -Source $Url -Destination $File 
     Write-Output "Downloaded lab files"
@@ -98,3 +103,6 @@ Else {
   }
 
 }
+
+# Pre-Pull images used in the lab
+docker pull microsoft:iis/latest

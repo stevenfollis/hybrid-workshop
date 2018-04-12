@@ -587,6 +587,26 @@
                 "id": "[resourceId('Microsoft.Network/loadBalancers/probes', 'apps', 'tcp8088')]"
               }
             }
+          },
+          {
+            "name": "tcp8082",
+            "properties": {
+              "frontendIPConfiguration": {
+                "id": "[resourceId('Microsoft.Network/loadBalancers/frontendIpConfigurations', 'apps', 'LoadBalancerFrontEnd')]"
+              },
+              "frontendPort": 8082,
+              "backendPort": 8082,
+              "enableFloatingIP": false,
+              "idleTimeoutInMinutes": 4,
+              "protocol": "Tcp",
+              "loadDistribution": "Default",
+              "backendAddressPool": {
+                "id": "[resourceId('Microsoft.Network/loadBalancers/backendAddressPools', 'apps', 'LoadBalancerBackEnd')]"
+              },
+              "probe": {
+                "id": "[resourceId('Microsoft.Network/loadBalancers/probes', 'apps', 'tcp8082')]"
+              }
+            }
           }
         ],
         "probes": [{
@@ -612,6 +632,15 @@
             "properties": {
               "protocol": "Tcp",
               "port": 8088,
+              "intervalInSeconds": 5,
+              "numberOfProbes": 2
+            }
+          },
+          {
+            "name": "tcp8082",
+            "properties": {
+              "protocol": "Tcp",
+              "port": 8082,
               "intervalInSeconds": 5,
               "numberOfProbes": 2
             }

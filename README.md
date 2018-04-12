@@ -369,8 +369,6 @@ You may also click on the service to open the right sidebar to inspect the servi
 
 	In the end it doesn't matter if we try and access the service via the manager or the worker, Docker EE will route the request correctly.
 
-	> **Note**: DTR is running on the worker node, so pointing to the DTR server is the same as pointing at the worker node.
-
 	This is an example of the built in ingress load balancer in Docker EE. Regardless of where a Linux-based service is actually running, you can access it from any Linux node in the cluster. So, if it's running on the manager in our cluster, you can still get to it by accessing the worker node. Docker EE can accept the request coming into any of the Linux nodes in the cluster, and route it to a host that's actually running a container for that service.
 
 1. Be sure to clear the filter in the UCP UI by clicking the `X` in the upper right corner. If you don't do this, you won't see any of the other services you deploy later in the lab

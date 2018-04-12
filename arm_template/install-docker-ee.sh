@@ -17,7 +17,9 @@ installEngine() {
   sudo apt-get -qq install \
     apt-transport-https \
     curl \
-    software-properties-common
+    software-properties-common \
+    dialog \
+    apt-utils
 
   # Add Docker’s official GPG key using your customer Docker EE repository URL
   curl -fsSL "$DOCKER_EE_URL"/ubuntu/gpg | sudo apt-key add -
@@ -35,6 +37,10 @@ installEngine() {
   # dpkg produces lots of chatter
   # redirect to abyss via https://askubuntu.com/a/258226
   sudo apt-get -qq install docker-ee > /dev/null
+
+  # Add eeadmin user to Docker group
+  sudo groupadd docker
+  sudo usermod -aG docker eeadmin
 
   # Finished
   echo "Finished installing Docker EE Engine"

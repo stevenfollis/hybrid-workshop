@@ -454,13 +454,13 @@
             }
           },
           {
-            "name": "tcp8080",
+            "name": "tcp8088",
             "properties": {
               "frontendIPConfiguration": {
                 "id": "[resourceId('Microsoft.Network/loadBalancers/frontendIpConfigurations', 'dtr', 'LoadBalancerFrontEnd')]"
               },
-              "frontendPort": 8080,
-              "backendPort": 8080,
+              "frontendPort": 8088,
+              "backendPort": 8088,
               "enableFloatingIP": false,
               "idleTimeoutInMinutes": 4,
               "protocol": "Tcp",
@@ -469,7 +469,7 @@
                 "id": "[resourceId('Microsoft.Network/loadBalancers/backendAddressPools', 'dtr', 'LoadBalancerBackEnd')]"
               },
               "probe": {
-                "id": "[resourceId('Microsoft.Network/loadBalancers/probes', 'dtr', 'tcp8080')]"
+                "id": "[resourceId('Microsoft.Network/loadBalancers/probes', 'dtr', 'tcp8088')]"
               }
             }
           }
@@ -493,10 +493,10 @@
             }
           },
           {
-            "name": "tcp8080",
+            "name": "tcp8088",
             "properties": {
               "protocol": "Tcp",
-              "port": 8080,
+              "port": 8088,
               "intervalInSeconds": 5,
               "numberOfProbes": 2
             }
@@ -569,13 +569,13 @@
             }
           },
           {
-            "name": "tcp8080",
+            "name": "tcp8088",
             "properties": {
               "frontendIPConfiguration": {
                 "id": "[resourceId('Microsoft.Network/loadBalancers/frontendIpConfigurations', 'apps', 'LoadBalancerFrontEnd')]"
               },
-              "frontendPort": 8080,
-              "backendPort": 8080,
+              "frontendPort": 8088,
+              "backendPort": 8088,
               "enableFloatingIP": false,
               "idleTimeoutInMinutes": 4,
               "protocol": "Tcp",
@@ -584,7 +584,7 @@
                 "id": "[resourceId('Microsoft.Network/loadBalancers/backendAddressPools', 'apps', 'LoadBalancerBackEnd')]"
               },
               "probe": {
-                "id": "[resourceId('Microsoft.Network/loadBalancers/probes', 'apps', 'tcp8080')]"
+                "id": "[resourceId('Microsoft.Network/loadBalancers/probes', 'apps', 'tcp8088')]"
               }
             }
           }
@@ -608,10 +608,10 @@
             }
           },
           {
-            "name": "tcp8080",
+            "name": "tcp8088",
             "properties": {
               "protocol": "Tcp",
-              "port": 8080,
+              "port": 8088,
               "intervalInSeconds": 5,
               "numberOfProbes": 2
             }

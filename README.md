@@ -151,6 +151,8 @@ The "Universal Control Plane" is a web-based interface for administering our con
 
 Let's start by adding our 2nd Windows Server 2016 worker node to the cluster.
 
+1. You will be asked for a license key. Click `Upload License` and select the `docker_subscription.lic` file that was downloaded from the Docker Store after signing up for the Trial License.
+
 1. From the main dashboard in UCP, click `Add a Node` on the bottom left of the screen
 
 	![](./images/add_a_node.png)
@@ -247,7 +249,8 @@ Let's start with the Linux version.
 
 	`$ docker build -t <dtr hostname>/<your user name>/linux_tweet_app .`
 
-	> **Note**: Be sure to substitute your DTR Hostname and your User Name - both these are listed at the top of your PWD page.
+	> **Note**: Be sure to substitute your DTR Hostname and your User Name - both these can be found in DTR on the dedicated repository page
+	![](./images/repo_name.png)
 
 	The `-t` tags the image with a name. In our case, the name indicates which DTR server and under which user's respository the image will live.
 
@@ -277,6 +280,8 @@ Let's start with the Linux version.
 		Removing intermediate container 54020cdec942
 		Successfully built ed5f550fc339
 		Successfully tagged  <dtr hostname>/<your user name>/linux_tweet_app:latest
+
+	> **Note** If you get an error `Got permission denied while trying to connect to the Docker daemon socket at unix:///var/run/docker.sock` run the command with `sudo` at the beginning, ex. `sudo docker build -t ...`
 
 1. Log into your DTR server from the command line
 
@@ -324,7 +329,7 @@ Services are application building blocks (although in many cases an application 
 
 1. In the upper right corner click `Create Service`
 
-1. Enter `linux_tweet_app` for the name.
+1. Enter `linux-app` for the name.
 
 1. Under `Image` enter the path to your image which should be `<dtr hostname>/<your user name>/linux_tweet_app`
 

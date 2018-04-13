@@ -82,7 +82,7 @@ docker pull microsoft:iis/latest
 
 # Download the VHD used in the lab
 $Url = "https://follisutility.blob.core.windows.net/hols/ws2016.vhd"
-$File = "C:\ws2016.vhd"
+$File = "C:\lab\ws2016.vhd"
 
 If (Test-Path -Path $File) {
   Write-Output "File exists, skipping download"
@@ -91,6 +91,7 @@ Else {
   Write-Output "Downloading Lab File"
 
   Try {
+    New-Item -ItemType directory -Path C:\lab
     Import-Module BitsTransfer -ErrorAction Stop    
     Start-BitsTransfer -Source $Url -Destination $File -ErrorAction Stop 
     Write-Host "Downloaded lab files"

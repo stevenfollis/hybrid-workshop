@@ -78,7 +78,7 @@ Else {
 }
 
 # Download the VHD used in the lab
-$Url = "https://follisutility.blob.core.windows.net/hols/ws2016.vhd?st=2018-04-12T01%3A36%3A00Z&se=2019-04-13T01%3A36%3A00Z&sp=rl&sv=2017-04-17&sr=b&sig=Ye0EZZcQthq3FlEKsf7sjlJtCFCQDC4jiAmDa%2BKXA3k%3D"
+$Url = "https://follisutility.blob.core.windows.net/hols/ws2016.vhd"
 $File = "C:\ws2016.vhd"
 
 If (Test-Path -Path $File) {
@@ -88,18 +88,15 @@ Else {
   Write-Output "Downloading Lab File"
 
   Try {
-
-    # Copy with alternate credentials
-    # https://stackoverflow.com/questions/612015/copy-item-with-alternate-credentials
-    # net use \\[IPaddress]\Folder 'PASSWORD' /USER:$User
-
-    Import-Module BitsTransfer    
-    Start-BitsTransfer -Source $Url -Destination $File 
-    Write-Output "Downloaded lab files"
+    Import-Module BitsTransfer -ErrorAction Stop    
+    Start-BitsTransfer -Source $Url -Destination $File -ErrorAction Stop 
+    Write-Host "Downloaded lab files"
   }
   Catch {
-    Write-Error "Failed to download lab files"
-    Error 1
+    Write-Host "Failed to download lab files"
+    write-host "Exception Type: $($_.Exception.GetType().FullName)"
+    write-host "Exception Message: $($_.Exception.Message)"
+    Break
   }
 
 }

@@ -77,6 +77,9 @@ Else {
 
 }
 
+# Pre-Pull images used in the lab
+docker pull microsoft:iis/latest
+
 # Download the VHD used in the lab
 $Url = "https://follisutility.blob.core.windows.net/hols/ws2016.vhd"
 $File = "C:\ws2016.vhd"
@@ -100,6 +103,3 @@ Else {
   }
 
 }
-
-# Pre-Pull images used in the lab
-docker pull microsoft:iis/latest

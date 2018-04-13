@@ -97,13 +97,13 @@
       }
     },
     "api": {
-      "availabilitySets": "2015-06-15",
-      "loadBalancers": "2015-06-15",
-      "networkInterfaces": "2015-06-15",
-      "publicIPAddresses": "2015-06-15",
-      "storageAccounts": "2015-06-15",
-      "virtualMachines": "2015-06-15",
-      "virtualNetwork": "2015-06-15"
+      "availabilitySets": "2017-12-01",
+      "loadBalancers": "2017-10-01",
+      "networkInterfaces": "2017-10-01",
+      "publicIPAddresses": "2017-10-01",
+      "storageAccounts": "2017-10-01",
+      "virtualMachines": "2017-12-01",
+      "virtualNetwork": "2017-10-01"
     }
   },
   "resources": [{
@@ -111,6 +111,10 @@
       "name": "[toLower(variables('shared').storage.name)]",
       "apiVersion": "[variables('api').storageAccounts]",
       "location": "[resourceGroup().location]",
+      "sku": {
+        "name": "Standard_LRS"
+      },
+      "kind": "Storage",
       "tags": {
         "displayName": "StorageAccount"
       },
@@ -667,7 +671,7 @@
         "ipConfigurations": [{
           "name": "ipconfig",
           "properties": {
-            "primary": "true",
+            "primary": true,
             "publicIPAddress": {
               "id": "[resourceId('Microsoft.Network/publicIPAddresses', concat('manager-', padLeft(copyIndex(1), 2, '0')))]"
             },
@@ -681,7 +685,7 @@
         }]
       },
       "dependsOn": [
-        "[resourceId('Microsoft.Network/virtualNetworks', 'vnet')]", 
+        "[resourceId('Microsoft.Network/virtualNetworks', 'vnet')]",
         "[resourceId('Microsoft.Network/publicIPAddresses', concat('manager-', padLeft(copyIndex(1), 2, '0')))]",
         "[resourceId('Microsoft.Network/loadBalancers', 'ucp')]"
       ]
@@ -702,7 +706,7 @@
         "ipConfigurations": [{
           "name": "ipconfig",
           "properties": {
-            "primary": "true",
+            "primary": true,
             "publicIPAddress": {
               "id": "[resourceId('Microsoft.Network/publicIPAddresses', concat('dtr-', padLeft(copyIndex(1), 2, '0')))]"
             },
@@ -716,7 +720,7 @@
         }]
       },
       "dependsOn": [
-        "[resourceId('Microsoft.Network/virtualNetworks', 'vnet')]", 
+        "[resourceId('Microsoft.Network/virtualNetworks', 'vnet')]",
         "[resourceId('Microsoft.Network/publicIPAddresses', concat('dtr-', padLeft(copyIndex(1), 2, '0')))]",
         "[resourceId('Microsoft.Network/loadBalancers', 'dtr')]"
       ]
@@ -737,7 +741,7 @@
         "ipConfigurations": [{
           "name": "ipconfig",
           "properties": {
-            "primary": "true",
+            "primary": true,
             "publicIPAddress": {
               "id": "[resourceId('Microsoft.Network/publicIPAddresses', concat('worker-linux-', padLeft(copyIndex(1), 2, '0')))]"
             },
@@ -783,7 +787,7 @@
         }]
       },
       "dependsOn": [
-        "[resourceId('Microsoft.Network/virtualNetworks', 'vnet')]", 
+        "[resourceId('Microsoft.Network/virtualNetworks', 'vnet')]",
         "[resourceId('Microsoft.Network/publicIPAddresses', concat('worker-win-', padLeft(copyIndex(1), 2, '0')))]"
       ]
     },
@@ -1006,7 +1010,7 @@
       "copy": {
         "name": "VMCopy",
         "count": "[sub(variables('dtr').instances, 1)]",
-        "mode": "serial"
+        "mode": "Serial"
       },
       "name": "[concat('dtr-', padLeft(copyIndex(2), 2, '0'))]",
       "apiVersion": "[variables('api').virtualMachines]",
